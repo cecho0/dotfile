@@ -8,53 +8,56 @@
 #       install.sh -t <true|false>
 #
 
-type_flag=""
+type_flag="hard"
 cover_flag=false
-install_list=()
-install_num=0
+all_flag=true
 
 home_path=$(echo ~)
 root_path=$(cd "$(dirname "$0")";pwd)
 
-zellij_cfg_path=${home_path}"/.config/zellij"
-alacritty_cfg_path=${home_path}"/.config/alacritty"
-tmux_cfg_path=${home_path}"/.tmux.conf"
+declare -A sys_cfg_map
+declare -A res_cfg_map
+declare -A install_map
+
+install_map["tmux"]=0
+install_map["alacritty"]=0
+install_map["zellij"]=0
+
+sys_cfg_map["tmux"]=${home_path}"/.tmux.conf"
+sys_cfg_map["alacritty"]=${home_path}"/.config/alacritty"
+sys_cfg_map["zellij"]=${home_path}"/.config/zellij"
+
+res_cfg_map["tmux"]=${root_path}"/tmux/.tmux.conf"
+res_cfg_map["alacritty"]=${root_path}"/alacritty"
+res_cfg_map["zellij"]=${root_path}"/zellij"
+
+cfg_color="\033[32m"
+end_color="\033[0m"
 
 while getopts ":s:t:c:p" opt
 do
     case $opt in
         s)
-            if [[ "${OPTARG}" == "tmux" ]]; then
-                for((i = 0; i < install_num; i++)); do
-                    if [[ ${install_list[i]} == "tmux" ]]; then
-                        echo "invalid param -s"
-                        exit 1;
-                    fi
-                done
-                install_list[install_num]="tmux"
-                install_num=$((install_num + 1))
-            elif [[ "${OPTARG}" == "zellij" ]]; then
-                for((i = 0; i < install_num; i++)); do
-                    if [[ ${install_list[i]} == "zellij" ]]; then
-                        echo "invalid param -s"
-                        exit 1;
-                    fi
-                done
-                install_list[install_num]="zellij"
-                install_num=$((install_num + 1))
-            elif [[ "${OPTARG}" == "alacritty" ]]; then
-                for((i = 0; i < install_num; i++)); do
-                    if [[ ${install_list[i]} == "alacritty" ]]; then
-                        echo "invalid param -s"
-                        exit 1;
-                    fi
-                done
-                install_list[install_num]="alacritty"
-                install_num=$((install_num + 1))
-            else
+            flag=0
+            for key in ${!install_map[*]}
+            do
+                if [[ "${key}" == "${OPTARG}" ]]; then
+                    flag=1
+                fi
+            done
+
+            if (( ${flag} != 1 )); then
                 echo "invalid param -s"
-                exit 1;
+                exit 1
             fi
+
+            for key in ${!install_map[*]}
+            do
+                if [[ "${key}" == "${OPTARG}" ]]; then
+                    install_map["${key}"]=$((${install_map["${key}"]} + 1))
+                    all_flag=false
+                fi
+            done
             ;;
         t)
             if [[ "${OPTARG}" == "soft" ]]; then
@@ -95,9 +98,25 @@ do
     esac
 done
 
+if [[ "${all_flag}" == "true" ]]; then
+    for key in ${!install_map[*]}
+    do
+        install_map["${key}"]=$((${install_map["${key}"]} + 1))
+    done
+fi
+
 while true
 do
-    read -r -p "cover: ${cover_flag}, type: ${type_flag}, Are You Sure? [Y/n] " input
+    echo -en "cover: ${cover_flag}, type: ${type_flag} \n"
+    echo -en "install list:\n"
+    for key in ${!install_map[*]}
+    do
+       if (( ${install_map[${key}]} != 0 )); then
+           echo -en "\t${cfg_color}${key}${end_color}\n"
+       fi
+    done
+
+    read -r -p "Are You Sure? [Y/n] " input
 
     case $input in
         [yY][eE][sS]|[yY])
@@ -113,101 +132,48 @@ do
     esac
 done
 
+echo ""
+
 if [[ "${type_flag}" == "soft" ]]; then
-    for((i = 0; i < install_num; i++)); do
-        # tmux
-        if [[ "${install_list[i]}" == "tmux" ]]; then
-            if [ -e ${tmux_cfg_path} ] && [ ${cover_flag} ==  "true" ]; then
-                rm ~/.tmux.conf
-                ln -s ${root_path}/tmux/.tmux.conf ${tmux_cfg_path}
-                echo "create a tmux soft link:  ${tmux_cfg_path}"
-            elif [ -e ${tmux_cfg_path} ]; then
-                echo "${tmux_cfg_path} exsit"
-                continue
-            else
-                ln -s ${root_path}/tmux/.tmux.conf ${tmux_cfg_path}
-                echo "create a tmux soft link:  ${tmux_cfg_path}"
-            fi
+    # soft link
+    for key in ${!install_map[*]}
+    do
+        if (( ${install_map[${key}]} == 0 )); then
+            continue
         fi
 
-        # alacritty
-        if [[ "${install_list[i]}" == "alacritty" ]]; then
-            if [ -e ${alacritty_cfg_path} ] && [ ${cover_flag} == "true" ] ; then
-                rm -rf ${alacritty_cfg_path}
-                ln -s ${root_path}/alacritty ${alacritty_cfg_path}
-                echo "create a alacritty soft link:  ${alacritty_cfg_path}"
-            elif [ -e ${alacritty_cfg_path} ] ; then
-                echo "${alacritty_cfg_path} exsit"
-                continue
-            else
-                ln -s ${root_path}/alacritty ${alacritty_cfg_path}
-                echo "create a alacritty soft link:  ${alacritty_cfg_path}"
-            fi
+        if [ -e ${sys_cfg_map[${key}]} ] && [ ${cover_flag} ==  "true" ]; then
+            rm -rf ${sys_cfg_map[${key}]}
+            ln -s ${res_cfg_map[${key}]} ${sys_cfg_map[${key}]}
+            echo -e "create a ${cfg_color}${key}${end_color} soft link:  ${cfg_color}${sys_cfg_map[${key}]}${end_color} "
+        elif [ -e ${sys_cfg_map[${key}]} ]; then
+            echo -e "${cfg_color}${sys_cfg_map[${key}]}${end_color} exsit"
+            continue
+        else
+            ln -s ${res_cfg_map[${key}]} ${sys_cfg_map[${key}]}
+            echo -e "create a ${cfg_color}${key}${end_color} soft link:  ${cfg_color}${sys_cfg_map[${key}]}${end_color}"
         fi
-
-        # zellij
-        if [[ "${install_list[i]}" == "zellij" ]]; then
-            if [ -e ${zellij_cfg_path} ] && [ ${cover_flag} == "true" ] ; then
-                rm -rf ${zellij_cfg_path}
-                ln -s ${root_path}/zellij ${zellij_cfg_path}
-                echo "create a zellij soft link:  ${zellij_cfg_path}"
-            elif [ -e ${zellij_cfg_path} ] ; then
-                echo "${zellij_cfg_path} exsit"
-                continue
-            else
-                ln -s ${root_path}/zellij ${zellij_cfg_path}
-                echo "create a zellij soft link:  ${zellij_cfg_path}"
-            fi
-        fi
-
     done
+
 else
-    for((i = 0; i < install_num; i++)); do
-        # tmux
-        if [[ "${install_list[i]}" == "tmux" ]]; then
-            if [ -e ${tmux_cfg_path} ] && [ ${cover_flag} ==  "true" ]; then
-                rm ${tmux_cfg_path}
-                cp ${root_path}/tmux/.tmux.conf ${tmux_cfg_path}
-                echo -e "create a tmux config file:  ${tmux_cfg_path}"
-            elif [ -e ${tmux_cfg_path} ]; then
-                echo "${tmux_cfg_path} exsit"
-                continue
-            else
-                cp ${root_path}/tmux/.tmux.conf ${tmux_cfg_path}
-                echo -e "create a tmux config file:  ${tmux_cfg_path}"
-            fi
+    # copy file
+    for key in ${!install_map[*]}
+    do
+        if (( ${install_map[${key}]} == 0 )); then
+            continue
         fi
 
-        # alacritty
-        if [[ "${install_list[i]}" == "alacritty" ]]; then
-            if [ -e ${alacritty_cfg_path} ] && [ ${cover_flag} == "true" ] ; then
-                rm -rf ${alacritty_cfg_path}
-                cp -rf ${root_path}/alacritty ${alacritty_cfg_path}
-                echo -e "create a alacritty config file:  ${alacritty_cfg_path}"
-            elif [ -e ${alacritty_cfg_path} ] ; then
-                echo "${alacritty_cfg_path} exsit"
-                continue
-            else
-                cp -rf ${root_path}/alacritty ${alacritty_cfg_path}
-                echo -e "create a alacritty config file:  ${alacritty_cfg_path}"
-            fi
+        if [ -e ${sys_cfg_map[${key}]} ] && [ ${cover_flag} ==  "true" ]; then
+            rm -rf ${sys_cfg_map[${key}]}
+            cp -rf ${res_cfg_map[${key}]} ${sys_cfg_map[${key}]}
+            echo -e "create a ${cfg_color}${key}${end_color} config file:  ${cfg_color}${sys_cfg_map[${key}]}${end_color}"
+        elif [ -e ${sys_cfg_map[${key}]} ]; then
+            echo -e "${cfg_color}${sys_cfg_map[${key}]}${end_color} exsit"
+            continue
+        else
+            cp -rf ${res_cfg_map[${key}]} ${sys_cfg_map[${key}]}
+            echo -e "create a ${cfg_color}${key}${end_color} config file:  ${cfg_color}${sys_cfg_map[${key}]}${end_color}"
         fi
-
-        # zellij
-        if [[ "${install_list[i]}" == "zellij" ]]; then
-            if [ -e ${zellij_cfg_path} ] && [ ${cover_flag} == "true" ] ; then
-                rm -rf ${zellij_cfg_path}
-                cp -rf ${root_path}/zellij ${zellij_cfg_path}
-                echo -e "create a zellij config file:  ${zellij_cfg_path}"
-
-            elif [ -e ${zellij_cfg_path} ] ; then
-                echo "${zellij_cfg_path} exsit"
-                continue
-            else
-                cp -rf ${root_path}/zellij ${zellij_cfg_path}
-                echo -e "create a zellij config file:  ${zellij_cfg_path}"
-            fi
-        fi
-        
     done
+
 fi
