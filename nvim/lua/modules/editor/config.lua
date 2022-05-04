@@ -24,7 +24,7 @@ end
 function config.AutoSave()
     require("autosave").setup(
         {
-            enabled = true,
+            enabled = false,
             -- 触发自动保存的事件（退出插入模式或者普通模式下文本内容发生改变）
             events = {"InsertLeave", "TextChanged"},
             -- 自动保存时的提示信息

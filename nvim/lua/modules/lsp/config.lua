@@ -220,6 +220,10 @@ function config.nvim_cmp()
                     }
                 )
             },
+            window = {
+                completion = cmp.config.window.bordered(),
+                documentation = cmp.config.window.bordered(),
+            },
             -- 对补全建议排序
             sorting = {
                 comparators = {
