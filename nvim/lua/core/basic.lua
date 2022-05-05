@@ -22,7 +22,7 @@ local function load_options()
             i插入模式
             c 命令行模式
         --]]
-        mouse          = "a";
+        --mouse          = "i";
         errorbells     = true;
         visualbell     = true;
         -- 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
