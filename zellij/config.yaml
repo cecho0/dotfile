@@ -486,6 +486,7 @@ on_force_close: detach
 #   - true
 #   - false (Default)
 #simplified_ui: true
+simplified_ui: false
 
 # Choose the path to the default shell that zellij will use for opening new panes
 # Default: $SHELL
@@ -496,12 +497,25 @@ on_force_close: detach
 #   - true (default)
 #   - false
 #pane_frames: true
+pane_frames: false
 
 # Choose the theme that is specified in the themes section.
 # For some examples, see: https://github.com/zellij-org/zellij/tree/main/example/themes
 # Default: default
 # theme: default
 themes:
+  default:
+    fg: [169,177,214] #A9B1D6
+    bg: [36,40,59] #24283B
+    black: [56,62,90] #383E5A
+    red: [249,51,87] #F9334D
+    green: [158,206,106]  #9ECE6A
+    yellow: [224,175,104] #E0AF68
+    blue: [122,162,247]  #7AA2F7
+    magenta: [187,154,247] #BB9AF7
+    cyan: [42,195,222] #2AC3DE
+    white: [192,202,245] #C0CAF5
+    orange: [255,158,100] #FF9E64
   one-half-dark:
     bg: [40, 44, 52]
     red: [227, 63, 76]
@@ -526,9 +540,45 @@ themes:
     cyan: [104, 157, 106]
     black: [60, 56, 54]
     white: [251, 241, 199]
+  tokyo-night:
+    fg: [169,177,214] #A9B1D6
+    bg: [26,27,38] #1A1B26
+    black: [56,62,90] #383E5A
+    red: [249,51,87] #F9334D
+    green: [158,206,106]  #9ECE6A
+    yellow: [224,175,104] #E0AF68
+    blue: [122,162,247]  #7AA2F7
+    magenta: [187,154,247] #BB9AF7
+    cyan: [42,195,222] #2AC3DE
+    white: [192,202,245] #C0CAF5
+    orange: [255,158,100] #FF9E64
+  tokyo-night-storm:
+    fg: [169,177,214] #A9B1D6
+    bg: [36,40,59] #24283B
+    black: [56,62,90] #383E5A
+    red: [249,51,87] #F9334D
+    green: [158,206,106]  #9ECE6A
+    yellow: [224,175,104] #E0AF68
+    blue: [122,162,247]  #7AA2F7
+    magenta: [187,154,247] #BB9AF7
+    cyan: [42,195,222] #2AC3DE
+    white: [192,202,245] #C0CAF5
+    orange: [255,158,100] #FF9E64
+  tokyo-night-light:
+    fg: [52,59,88] #343B58
+    bg: [213,214,219] #D5D6DB
+    black: [15,15,20] #0F0F14
+    red: [186,75,96] #BA4B60
+    green: [72,94,48]  #485E30
+    yellow: [143,94,21] #8F5E15
+    blue: [52,84,138]  #34548A
+    magenta: [90,74,120] #5A4A78
+    cyan: [15,75,110] #0F4B6E
+    white: [130,137,172] #8289AC
+    orange: [150,80,39] #965027
 # Choose the mode that zellij uses when starting up.
 # Default: normal
-#default_mode: locked
+default_mode: locked
 
 # Toggle enabling the mouse mode.
 # On certain configurations, or terminals this could
@@ -536,7 +586,8 @@ themes:
 # Options:
 #   - true (default)
 #   - false
-mouse_mode: true
+# 设置true之后不能右键粘贴
+mouse_mode: false
 
 # Configure the scroll back buffer size
 # This is the number of lines zellij stores for each pane in the scroll back
@@ -544,6 +595,20 @@ mouse_mode: true
 # Valid values: positive integers
 # Default value: 10000
 scroll_buffer_size: 10000
+
+scrolling:
+  # 历史保留行数
+  history: 2000
+
+  # 每次滚动行数
+  multiplier: 20
+
+  # 每次滚动行数（分屏时）
+  faux_multiplier: 100
+
+  # 自动滚动至最新行
+  auto_scroll: true
+
 
 # Provide a command to execute when copying text. The text will be piped to
 # the stdin of the program to perform the copy. This can be used with
@@ -560,4 +625,4 @@ scroll_buffer_size: 10000
 # Options:
 #   - system (default)
 #   - primary
-#copy_clipboard: primary
+# copy_clipboard: primary

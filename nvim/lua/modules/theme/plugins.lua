@@ -1,11 +1,6 @@
 local theme = {}
 local conf = require("modules.theme.config")
 
---[[
-dark:
-bkegley/gloombuddy
---]]
-
 -- stome, night, day
 theme["folke/tokyonight.nvim"] = {
     config = conf.tokyonight,

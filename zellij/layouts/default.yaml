@@ -18,3 +18,9 @@ template:
       run:
         plugin:
           location: "zellij:status-bar"
+
+tabs:
+  - name: "code"
+  - name: "server"
+  - name: "mirror"
+  - name: "tmp"

@@ -14,18 +14,22 @@ utils["nvim-telescope/telescope-ui-select.nvim"] = {
     config = conf.telescope_ui_select,
 }
 
-utils["numToStr/FTerm.nvim"] = {
+utils["akinsho/toggleterm.nvim"] = {
     opt = true,
     event = "BufWinEnter",
-    config = conf.FTerm,
+    config = conf.toggleterm,
 }
 
 utils["dstein64/vim-startuptime"] = {
+    opt = true,
+    event = "BufWinEnter",
     config = conf.startuptime
 }
 
-utils["Shatur/neovim-session-manager"] = {
-    config = conf.neovim_session_manager,
-}
+-- utils["Shatur/neovim-session-manager"] = {
+--     opt = true,
+--     event = "VimEnter",
+--     config = conf.neovim_session_manager,
+-- }
 
 return utils
