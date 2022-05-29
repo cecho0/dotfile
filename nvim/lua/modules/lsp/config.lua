@@ -22,6 +22,41 @@ function config.nvim_lspconfig()
     )
 end
 
+function config.rust_tools()
+    local opts = {
+        tools = { -- rust-tools options
+            autoSetHints = true,
+            hover_with_actions = true,
+            inlay_hints = {
+                show_parameter_hints = true,
+                parameter_hints_prefix = "<-",
+                other_hints_prefix = "=>",
+                typeHints = true,
+            },
+        },
+    
+        -- all the opts to send to nvim-lspconfig
+        -- these override the defaults set by rust-tools.nvim
+        -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+        server = {
+            -- on_attach is a callback called when the language server attachs to the buffer
+            -- on_attach = on_attach,
+            settings = {
+                -- to enable rust-analyzer settings visit:
+                -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+                ["rust-analyzer"] = {
+                    -- enable clippy on save
+                    checkOnSave = {
+                        command = "clippy"
+                    },
+                }
+            }
+        },
+    }
+    
+    require('rust-tools').setup(opts)
+end
+
 function config.nvim_lsp_installer()
     local lsp_installer_servers = require("nvim-lsp-installer.servers")
     -- 使用 cmp_nvim_lsp 代替内置 omnifunc，获得更强的补全体验
@@ -41,6 +76,7 @@ function config.nvim_lsp_installer()
         --sqls = require("lsp.sqls"),
         -- vuels = require("lsp.vuels")
         clangd = require("lsp.clangd"),
+        rust_analyzer = require("lsp.rust_analyzer"),
     }
 
     --这里是 LSP 服务启动后的按键加载
@@ -91,6 +127,9 @@ function config.nvim_lsp_installer()
     -- 自动安装或启动 LanguageServers
     for server_name, server_options in pairs(servers) do
         local server_available, server = lsp_installer_servers.get_server(server_name)
+        -- debug
+        --print(server_name, server_available)
+
         -- 判断服务是否可用
         if server_available then
             -- 判断服务是否准备就绪，若就绪则启动服务
@@ -116,6 +155,7 @@ function config.nvim_lsp_installer()
                 server:install()
             end
         end
+
     end
 end
 

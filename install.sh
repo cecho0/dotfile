@@ -3,7 +3,7 @@
 # install script
 # Usage:
 #       install.sh [options]
-#       install.sh -s <tmux|alacritty|zellij|nvim|starship>
+#       install.sh -s <tmux|alacritty|zellij|nvim|starship|gitui|helix>
 #       install.sh -c <soft|hard>
 #       install.sh -t <true|false>
 #
@@ -24,18 +24,24 @@ install_map["alacritty"]=0
 install_map["zellij"]=0
 install_map["nvim"]=0
 install_map["starship"]=0
+install_map["gitui"]=0
+install_map["helix"]=0
 
 sys_cfg_map["tmux"]=${home_path}"/.tmux.conf"
 sys_cfg_map["alacritty"]=${home_path}"/.config/alacritty"
 sys_cfg_map["zellij"]=${home_path}"/.config/zellij"
 sys_cfg_map["nvim"]=${home_path}"/.config/nvim"
-sys_cfg_map["starship"]=${home_path}/.config/starship.toml
+sys_cfg_map["starship"]=${home_path}"/.config/starship.toml"
+sys_cfg_map["gitui"]=${home_path}"/.config/gitui"
+sys_cfg_map["helix"]=${home_path}"/.config/helix"
 
 res_cfg_map["tmux"]=${root_path}"/tmux/.tmux.conf"
 res_cfg_map["alacritty"]=${root_path}"/alacritty"
 res_cfg_map["zellij"]=${root_path}"/zellij"
 res_cfg_map["nvim"]=${root_path}"/nvim"
-res_cfg_map["starship"]=${root_path}/"/starship/starship.toml"
+res_cfg_map["starship"]=${root_path}"/starship/starship.toml"
+res_cfg_map["gitui"]=${root_path}"/gitui"
+res_cfg_map["helix"]=${root_path}"/helix"
 
 cfg_color="\033[32m"
 end_color="\033[0m"
@@ -88,7 +94,7 @@ do
         p)
             echo -e "Usage:\n\t install.sh [options] \n"
             echo -e "\t install.sh \t default install all options"
-            echo -e "\t install.sh -s <tmux|zellij|alacritty|nvim|starship> \t select one section install"
+            echo -e "\t install.sh -s <tmux|zellij|alacritty|nvim|starship|gitui|helix> \t select one section install"
             echo -e "\t install.sh -t <soft|hard> \t hard means copy config file, soft means crate a soft link"
             echo -e "\t install.sh -c <true|false> \t true means replace the original configuration with the example configuration, false means retain original configuration"
             echo "";;
@@ -96,7 +102,7 @@ do
             echo -e "Syntax Error\n"
             echo -e "Usage:\n\t install.sh [options] \n"
             echo -e "\t install.sh \t default install all options"
-            echo -e "\t install.sh -s <tmux|zellij|alacritty|nvim|starship> \t select one section install"
+            echo -e "\t install.sh -s <tmux|zellij|alacritty|nvim|starship|gitui|helix> \t select one section install"
             echo -e "\t install.sh -t <soft|hard> \t hard means copy config file, soft means crate a soft link"
             echo -e "\t install.sh -c <true|false> \t true means replace the original configuration with the example configuration, false means retain original configuration"
             echo ""

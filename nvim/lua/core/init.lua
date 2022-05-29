@@ -27,9 +27,19 @@ function register_cmd()
     vim.cmd("command! ExitAll : qa!")
 end
 
+local load_client_cfg = function ()
+    -- vim.g.neovide_cursor_vfx_mode = "sonicboom"
+    vim.g.neovide_cursor_vfx_mode = "torpedo"
+    vim.g.neovide_cursor_vfx_particle_lifetime = 2
+    vim.g.neovide_cursor_vfx_particle_density = 10.0
+    vim.g.neovide_cursor_vfx_opacity = 300.0
+end
+
 local load_dashborde_cfg = function ()
     register_cmd()
 
+    -- ascii-image-converter可用来生成像素画
+    
     -- vim.g.dashboard_custom_header = {
     --     "          ▀████▀▄▄              ▄█ ",
     --     "            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ",
@@ -139,6 +149,7 @@ local load_core = function()
 
     load_dashborde_cfg()
     load_colorscheme()
+    load_client_cfg()
 end
 
 load_core()

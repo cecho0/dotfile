@@ -11,13 +11,13 @@ template:
           location: "zellij:tab-bar"
     - direction: Vertical # part 2
       body: true
-    - direction: Vertical # part 3
-      borderless: true
-      split_size:
-        Fixed: 2
-      run:
-        plugin:
-          location: "zellij:status-bar"
+    #- direction: Vertical # part 3
+    #  borderless: true
+    #  split_size:
+    #    Fixed: 2
+    #  run:
+    #    plugin:
+    #      location: "zellij:status-bar"
 
 tabs:
   - name: "code"

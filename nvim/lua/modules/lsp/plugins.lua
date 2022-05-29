@@ -81,4 +81,9 @@ lsp["simrat39/symbols-outline.nvim"] = {
     config = conf.symbols_outline,
 }
 
+lsp["simrat39/rust-tools.nvim"] = {
+    config = conf.rust_tools,
+    after = {"nvim-lspconfig"}
+}
+
 return lsp

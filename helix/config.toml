@@ -1,0 +1,47 @@
+# theme = "nord"
+
+[editor]
+scroll-lines = 3
+line-number = "absolute"
+mouse = false
+true-color = true
+auto-info = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+ignore = true
+git-ignore = true
+git-global = true
+git-exclude = true
+
+[editor.search]
+smart-case = true
+wrap-around = true
+
+[editor.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
+'<' = '>'
+
+[keys.normal]
+"," = { q = ":quit", w = ":write"}
+Z = { Z = ":wqa", z = ":qa!" }
+
+[keys.insert]
+"," = { q = ":quit", w = ":write" }
+Z = { Z = ":wqa", z = ":qa!" }
+
+# lsp goto
+[keys.normal.g]
+d = "goto_definition"
+z = "goto_previous_buffer"
+x = "goto_next_buffer"
+
