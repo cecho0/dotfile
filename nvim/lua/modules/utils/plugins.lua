@@ -26,10 +26,8 @@ utils["dstein64/vim-startuptime"] = {
     config = conf.startuptime
 }
 
--- utils["Shatur/neovim-session-manager"] = {
---     opt = true,
---     event = "VimEnter",
---     config = conf.neovim_session_manager,
--- }
+utils["Shatur/neovim-session-manager"] = {
+    config = conf.neovim_session_manager,
+}
 
 return utils

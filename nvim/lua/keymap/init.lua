@@ -91,7 +91,6 @@ local base_map = {
     --["n|<leader>x"] = map_cr_esc("BufferLineCycleNext"):with_noremap(),
     --["n|<leader>z"] = map_cr_esc("BufferLineCyclePrev"):with_noremap(),
 
-
     -- telescopion
     ["n|<leader>fd"] = map_cr_esc("Telescope live_grep theme=dropdown"):with_noremap(),
     ["n|<leader>ff"] = map_cr_esc("Telescope find_files theme=dropdown"):with_noremap(),
