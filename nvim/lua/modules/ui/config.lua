@@ -1,7 +1,104 @@
 local config = {}
 
+function reg_cmd()
+    vim.cmd("command! NewFile : ene!")
+    vim.cmd("command! ChangeScheme : Telescope colorscheme")
+    vim.cmd("command! EditCfg : edit ~/.config/nvim/init.lua")
+    vim.cmd("command! ExitAll : qa!")
+end
+
 function config.dashboard()
+    -- ascii-image-converter可用来生成像素画
+    
+    -- vim.g.dashboard_custom_header = {
+    --     "          ▀████▀▄▄              ▄█ ",
+    --     "            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ",
+    --     "    ▄        █          ▀▀▀▀▄  ▄▀  ",
+    --     "   ▄▀ ▀▄      ▀▄              ▀▄▀  ",
+    --     "  ▄▀    █     █▀   ▄█▀▄      ▄█    ",
+    --     "  ▀▄     ▀▄  █     ▀██▀     ██▄█   ",
+    --     "   ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █  ",
+    --     "    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀  ",
+    --     "   █   █  █      ▄▄           ▄▀   ",
+    -- }
+
+    -- vim.g.dashboard_custom_header = {
+    -- "",
+    -- "    ⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄ ",
+    -- "    ⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄ ",
+    -- "   ⢀⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥⣿⣿⠄ ",
+    -- "   ⢸⣇⠻⣿⣿⣿⣧⣀⢀⣠⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⣿⣿⣿⠄ ",
+    -- "  ⢀⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋⣰ ",
+    -- "  ⣼⣖⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⢇⣿⣿⡷⠶⠶⢿⣿⣿⠇⢀⣤ ",
+    -- " ⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣷⣶⣥⣴⣿⡗ ",
+    -- " ⢀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟  ",
+    -- " ⢸⣿⣦⣌⣛⣻⣿⣿⣧⠙⠛⠛⡭⠅⠒⠦⠭⣭⡻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃  ",
+    -- " ⠘⣿⣿⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠹⠈⢋⣽⣿⣿⣿⣿⣵⣾⠃  ",
+    -- "  ⠘⣿⣿⣿⣿⣿⣿⣿⣿⠄⣴⣿⣶⣄⠄⣴⣶⠄⢀⣾⣿⣿⣿⣿⣿⣿⠃   ",
+    -- "   ⠈⠻⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⠄⣿⣿⡀⣾⣿⣿⣿⣿⣛⠛⠁    ",
+    -- "     ⠈⠛⢿⣿⣿⣿⠁⠞⢿⣿⣿⡄⢿⣿⡇⣸⣿⣿⠿⠛⠁      ",
+    -- "        ⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁     ⢀⣠⣴ ",
+    -- " ⣿⣿⣿⣶⣶⣮⣥⣒⠲⢮⣝⡿⣿⣿⡆⣿⡿⠃⠄⠄⠄⠄⠄⠄⠄⣠⣴⣿⣿⣿ ",
+    -- "",
+    -- }
+
+    reg_cmd()
     --vim.g.dashboard_default_executive = "telescope"
+    vim.g.dashboard_custom_header = {
+        "    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠤⠖⠚⢉⣩⣭⡭⠛⠓⠲⠦⣄⡀⠀⠀⠀⠀⠀⠀⠀  ",
+        "    ⠀⠀⠀⠀⠀⠀⢀⡴⠋⠁⠀⠀⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠳⢦⡀⠀⠀⠀⠀  ",
+        "    ⠀⠀⠀⠀⢀⡴⠃⢀⡴⢳⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣆⠀⠀⠀  ",
+        "    ⠀⠀⠀⠀⡾⠁⣠⠋⠀⠈⢧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢧⠀⠀  ",
+        "    ⠀⠀⠀⣸⠁⢰⠃⠀⠀⠀⠈⢣⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣇⠀  ",
+        "    ⠀⠀⠀⡇⠀⡾⡀⠀⠀⠀⠀⣀⣹⣆⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⠀  ",
+        "    ⠀⠀⢸⠃⢀⣇⡈⠀⠀⠀⠀⠀⠀⢀⡑⢄⡀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇  ",
+        "    ⠀⠀⢸⠀⢻⡟⡻⢶⡆⠀⠀⠀⠀⡼⠟⡳⢿⣦⡑⢄⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇  ",
+        "    ⠀⠀⣸⠀⢸⠃⡇⢀⠇⠀⠀⠀⠀⠀⡼⠀⠀⠈⣿⡗⠂⠀⠀⠀⠀⠀⠀⠀⢸⠁  ",
+        "    ⠀⠀⡏⠀⣼⠀⢳⠊⠀⠀⠀⠀⠀⠀⠱⣀⣀⠔⣸⠁⠀⠀⠀⠀⠀⠀⠀⢠⡟⠀  ",
+        "    ⠀⠀⡇⢀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀⢸⠃⠀  ",
+        "    ⠀⢸⠃⠘⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠁⠀⠀⢀⠀⠀⠀⠀⠀⣾⠀⠀  ",
+        "    ⠀⣸⠀⠀⠹⡄⠀⠀⠈⠁⠀⠀⠀⠀⠀⠀⠀⡞⠀⠀⠀⠸⠀⠀⠀⠀⠀⡇⠀⠀  ",
+        "    ⠀⡏⠀⠀⠀⠙⣆⠀⠀⠀⠀⠀⠀⠀⢀⣠⢶⡇⠀⠀⢰⡀⠀⠀⠀⠀⠀⡇⠀⠀  ",
+        "    ⢰⠇⡄⠀⠀⠀⡿⢣⣀⣀⣀⡤⠴⡞⠉⠀⢸⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⣧⠀⠀  ",
+        "    ⣸⠀⡇⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⢹⠀⠀⢸⠀⠀⢀⣿⠇⠀⠀⠀⠁⠀⢸⠀⠀  ",
+        "    ⣿⠀⡇⠀⠀⠀⠀⠀⢀⡤⠤⠶⠶⠾⠤⠄⢸⠀⡀⠸⣿⣀⠀⠀⠀⠀⠀⠈⣇⠀  ",
+        "    ⡇⠀⡇⠀⠀⡀⠀⡴⠋⠀⠀⠀⠀⠀⠀⠀⠸⡌⣵⡀⢳⡇⠀⠀⠀⠀⠀⠀⢹⡀  ",
+        "    ⡇⠀⠇⠀⠀⡇⡸⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠮⢧⣀⣻⢂⠀⠀⠀⠀⠀⠀⢧  ",
+        "    ⣇⠀⢠⠀⠀⢳⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⡎⣆⠀⠀⠀⠀⠀⠘  ",
+    }
+
+    vim.g.dashboard_custom_section = {
+        a = {
+            description = {"[  New file      ]"},
+            command = ":NewFile",
+        },
+        b = {
+            description = {"[  Find text     ]"},
+            command = "Telescope live_grep",
+        },
+        c = {
+            description = {"[  Find file     ]"},
+            command = "Telescope find_files",
+        },
+        d = {
+            description = {"[  Find project  ]"},
+            command = "SessionManager load_session",
+        },
+        e = {
+            description = {"[  Configuration ]"},
+            command = "EditCfg",
+        },
+        f = {
+            description = {"[  Change themes ]"},
+            command = "ChangeScheme",
+        },
+        g = {
+            description = {"[  Quit Neovim   ]"},
+            command = "ExitAll",
+        },
+    }
+    vim.g.indentLine_fileTypeExclude = "dashboard"
+
 end
 
 function config.lualine()
@@ -146,6 +243,47 @@ function config.indent_blakline()
             show_end_of_line = true
         }
     )
+    vim.g.indent_blankline_char = "│"
+    vim.g.indent_blankline_show_first_indent_level = true
+    vim.g.indent_blankline_filetype_exclude = {
+        "startify",
+        "dashboard",
+        "dotooagenda",
+        "log",
+        "fugitive",
+        "gitcommit",
+        "packer",
+        "vimwiki",
+        "markdown",
+        "json",
+        "txt",
+        "vista",
+        "help",
+        "todoist",
+        "NvimTree",
+        "peekaboo",
+        "git",
+        "TelescopePrompt",
+        "undotree",
+        "flutterToolsOutline",
+        "" -- for all buffers without a file type
+    }
+    vim.g.indent_blankline_buftype_exclude = {"terminal", "nofile"}
+    vim.g.indent_blankline_show_trailing_blankline_indent = false
+    vim.g.indent_blankline_show_current_context = true
+    vim.g.indent_blankline_context_patterns = {
+        "class",
+        "function",
+        "method",
+        "block",
+        "list_literal",
+        "selector",
+        "^if",
+        "^table",
+        "if_statement",
+        "while",
+        "for"
+    }
 end
 
 function config.neoscroll()
@@ -177,8 +315,6 @@ function config.nvim_notify()
     -- 级别有：info、warn、error、debug、trace
     -- 示例：
     -- vim.notify("hello world", "info", {title = "info"})
-
 end
-
 
 return config

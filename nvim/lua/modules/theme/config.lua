@@ -25,4 +25,7 @@ function config.gloombuddy()
 
 end
 
+function config.nightfox()
+end
+
 return config

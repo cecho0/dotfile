@@ -42,6 +42,10 @@ local base_map = {
     ["n|<C-k>"] = map_cmd("<C-w>k"):with_noremap(),
     ["n|<C-l>"] = map_cmd("<C-w>l"):with_noremap(),
 
+    -- G
+    ["n|ge"] = map_cmd("G"):with_noremap(),
+    ["n|G"] = map_cmd("<Nop>"):with_noremap(),
+
     -- tab缩进
     ["v|<TAB>"] = map_cmd(">gv"):with_noremap();
     ["v|<S-TAB>"] = map_cmd("<gv"):with_noremap();

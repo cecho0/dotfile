@@ -29,4 +29,8 @@ theme["bkegley/gloombuddy"] = {
     }
 }
 
+theme["EdenEast/nightfox.nvim"] = {
+    config = conf.nightfox
+}
+
 return theme
