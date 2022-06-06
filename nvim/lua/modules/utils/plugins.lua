@@ -27,6 +27,8 @@ utils["dstein64/vim-startuptime"] = {
 }
 
 utils["Shatur/neovim-session-manager"] = {
+    opt = true,
+    event = "BufWinEnter",
     config = conf.neovim_session_manager,
 }
 

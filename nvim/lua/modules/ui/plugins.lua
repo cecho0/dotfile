@@ -26,6 +26,7 @@ ui["akinsho/nvim-bufferline.lua"] = {
 }
 
 ui["lukas-reineke/indent-blankline.nvim"] = {
+    event = 'BufRead',
     config = conf.indent_blakline
 }
 

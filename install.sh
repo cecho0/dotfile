@@ -4,8 +4,8 @@
 # Usage:
 #       install.sh [options]
 #       install.sh -s <tmux|alacritty|zellij|nvim|starship|helix>
-#       install.sh -c <soft|hard>
-#       install.sh -t <true|false>
+#       install.sh -t <soft|hard>
+#       install.sh -c <true|false>
 #
 
 type_flag="hard"

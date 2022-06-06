@@ -9,6 +9,7 @@ lsp["neovim/nvim-lspconfig"] = {
 -- 自动安装 LSP
 lsp["williamboman/nvim-lsp-installer"] = {
     config = conf.nvim_lsp_installer,
+    after = "lspsaga.nvim",
 }
 
 -- LSP UI 美化
