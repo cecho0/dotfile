@@ -47,6 +47,13 @@ if [ "$(command -v find)" ]; then
     alias find='fd'
 fi
 
+# ripgrep -- A modern replacement for grep
+if [ "$(command -v rg)" ]; then
+    unalias -m 'grep'
+    alias grep='rg -S'
+    alias rg='rg -S'
+fi
+
 # exa  -- A modern replacement for ls.
 if [ "$(command -v exa)" ]; then
     unalias -m 'l'
