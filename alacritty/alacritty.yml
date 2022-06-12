@@ -212,6 +212,12 @@ schemes:
       magenta: '#B48EAD'
       cyan:    '#8FBCBB'
       white:   '#ECEFF4'
+    cursor:
+      #text:   CellBackground
+      cursor: '#EBCB8B'
+    vi_mode_cursor:
+      text:   CellBackground
+      #cursor: '#EBCB8B'
 
   tokyo-night: &tokyo-night
     # Default colors
@@ -358,7 +364,9 @@ schemes:
       white:   '#928374'
     # indexed_colors: []
 
-colors: *tokyo-night-storm
+#colors: *tokyo-night-storm
+colors: *nord
+
 # Colors (Tomorrow Night)
 #colors:
   # Default colors
@@ -554,7 +562,7 @@ selection:
 
 cursor:
   # Cursor style
-  #style:
+  style:
     # Cursor shape
     #
     # Values for `shape`:
@@ -585,7 +593,7 @@ cursor:
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
-  #unfocused_hollow: true
+  unfocused_hollow: true
 
   # Thickness of the cursor relative to the cell width as floating point number
   # from `0.0` to `1.0`.
@@ -1048,14 +1056,42 @@ mouse_bindings:
   #print_events: false
 
 key_bindings:
- - { key: Return   ,   mods: Control,         action: SpawnNewInstance }
- - { key: F1       ,   mods: Control,         action: ToggleFullscreen }
- - { key: F2       ,   mods: Control,         action: Minimize         }
- - { key: F4       ,   mods: Control,         action: Quit             }
- - { key: Key0     ,   mods: Control,         action: IncreaseFontSize }
- - { key: Key9     ,   mods: Control,         action: DecreaseFontSize }
- - { key: Key8     ,   mods: Control,         action: ResetFontSize    }
- - { key: Key1     ,   mods: Control,         action: ScrollPageUp     }
- - { key: Key2     ,   mods: Control,         action: ScrollPageDown   }
- - { key: Key3     ,   mods: Control,         action: ScrollHalfPageUp     }
- - { key: Key4     ,   mods: Control,         action: ScrollHalfPageDown   }
+ # window
+ - { key: Return   ,   mods: Control,                         action: SpawnNewInstance        }
+ - { key: F1       ,   mods: Control,                         action: ToggleFullscreen        }
+ - { key: Return   ,   mods: Alt,                             action: ToggleFullscreen        }
+ - { key: F2       ,   mods: Control,                         action: Minimize                }
+ - { key: F4       ,   mods: Control,                         action: Quit                    }
+
+ # font
+ - { key: Key0     ,   mods: Control,                         action: IncreaseFontSize        }
+ - { key: Key9     ,   mods: Control,                         action: DecreaseFontSize        }
+ - { key: Key8     ,   mods: Control,                         action: ResetFontSize           }
+
+ # movement
+ - { key: B        ,   mods: Control,       mode: Vi|~Search, action: ScrollPageUp            }
+ - { key: F        ,   mods: Control,       mode: Vi|~Search, action: ScrollPageDown          }
+ - { key: U        ,   mods: Control,       mode: Vi|~Search, action: ScrollHalfPageUp        }
+ - { key: D        ,   mods: Control,       mode: Vi|~Search, action: ScrollHalfPageDown      }
+
+ # vi mode
+ - { key: E        ,   mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
+ - { key: I        ,   mode: Vi|~Search,                      action: ToggleViMode            }
+
+ - { key: K        ,   mode: Vi|~Search,                      action: Up                      }
+ - { key: J        ,   mode: Vi|~Search,                      action: Down                    }
+ - { key: H        ,   mode: Vi|~Search,                      action: Left                    }
+ - { key: L        ,   mode: Vi|~Search,                      action: Right                   }
+
+ # select
+ - { key: V,                                mode: Vi|~Search, action: ToggleNormalSelection   }
+ - { key: V        ,   mods: Shift,         mode: Vi|~Search, action: ToggleLineSelection     }
+ - { key: V        ,   mods: Control,       mode: Vi|~Search, action: ToggleSemanticSelection }
+
+ # search
+ - { key: N        ,   mode: Vi|~Search,                      action: SearchNext              }
+ - { key: N        ,   mods: Shift,         mode: Vi|~Search, action: SearchPrevious          }
+
+ # copy and paste
+ - { key: V        ,   mods: Control,       mode: ~Vi,              action: Paste             }
+ - { key: C        ,   mods: Control,       mode: Vi,               action: Copy              }

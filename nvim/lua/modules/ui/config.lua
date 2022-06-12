@@ -9,19 +9,8 @@ end
 
 function config.dashboard()
     -- ascii-image-converter可用来生成像素画
-    
-    -- vim.g.dashboard_custom_header = {
-    --     "          ▀████▀▄▄              ▄█ ",
-    --     "            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ",
-    --     "    ▄        █          ▀▀▀▀▄  ▄▀  ",
-    --     "   ▄▀ ▀▄      ▀▄              ▀▄▀  ",
-    --     "  ▄▀    █     █▀   ▄█▀▄      ▄█    ",
-    --     "  ▀▄     ▀▄  █     ▀██▀     ██▄█   ",
-    --     "   ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █  ",
-    --     "    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀  ",
-    --     "   █   █  █      ▄▄           ▄▀   ",
-    -- }
 
+    local db = require("dashboard")
     -- vim.g.dashboard_custom_header = {
     -- "",
     -- "    ⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄ ",
@@ -43,8 +32,7 @@ function config.dashboard()
     -- }
 
     reg_cmd()
-    --vim.g.dashboard_default_executive = "telescope"
-    vim.g.dashboard_custom_header = {
+    db.custom_header = {
         "    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠤⠖⠚⢉⣩⣭⡭⠛⠓⠲⠦⣄⡀⠀⠀⠀⠀⠀⠀⠀  ",
         "    ⠀⠀⠀⠀⠀⠀⢀⡴⠋⠁⠀⠀⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠳⢦⡀⠀⠀⠀⠀  ",
         "    ⠀⠀⠀⠀⢀⡴⠃⢀⡴⢳⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣆⠀⠀⠀  ",
@@ -65,39 +53,53 @@ function config.dashboard()
         "    ⡇⠀⡇⠀⠀⡀⠀⡴⠋⠀⠀⠀⠀⠀⠀⠀⠸⡌⣵⡀⢳⡇⠀⠀⠀⠀⠀⠀⢹⡀  ",
         "    ⡇⠀⠇⠀⠀⡇⡸⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠮⢧⣀⣻⢂⠀⠀⠀⠀⠀⠀⢧  ",
         "    ⣇⠀⢠⠀⠀⢳⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⡎⣆⠀⠀⠀⠀⠀⠘  ",
+        "                                        ",
     }
 
-    vim.g.dashboard_custom_section = {
-        a = {
-            description = {"[  New file      ]"},
-            command = ":NewFile",
+    db.custom_center = {
+        {
+            icon = '   ',
+            desc = 'New file      ',
+            action = 'NewFile'
         },
-        b = {
-            description = {"[  Find text     ]"},
-            command = "Telescope live_grep",
+        {
+            icon = '   ',
+            desc = 'Find text     ',
+            action = 'Telescope live_grep'
         },
-        c = {
-            description = {"[  Find file     ]"},
-            command = "Telescope find_files",
+        {
+            icon = '   ',
+            desc = 'Find file     ',
+            action = 'Telescope find_files'
         },
-        d = {
-            description = {"[  Find project  ]"},
-            command = "SessionManager load_session",
+        {
+            icon = '   ',
+            desc = 'Find project  ',
+            action = 'SessionManager load_session'
         },
-        e = {
-            description = {"[  Configuration ]"},
-            command = "EditCfg",
+        {
+            icon = '   ',
+            desc = 'Configuration ',
+            action = 'EditCfg'
         },
-        f = {
-            description = {"[  Change themes ]"},
-            command = "ChangeScheme",
+        {
+            icon = '   ',
+            desc = 'Change themes ',
+            action = 'ChangeScheme'
         },
-        g = {
-            description = {"[  Quit Neovim   ]"},
-            command = "ExitAll",
+        {
+            icon = '   ',
+            desc = 'Quit Neovim   ',
+            action = 'ExitAll'
         },
     }
-    vim.g.indentLine_fileTypeExclude = "dashboard"
+
+    vim.cmd("highlight DashboardCenter guifg='#A3BE8C'")
+    vim.cmd("highlight DashboardCenterIcon guifg='#81A1C1'")
+    vim.cmd("highlight DashboardFooter guifg='#b48EAD'")
+    vim.cmd("highlight DashboardHeader guifg='#EBCB8B'")
+
+    --vim.g.indentLine_fileTypeExclude = "dashboard"
 
 end
 
