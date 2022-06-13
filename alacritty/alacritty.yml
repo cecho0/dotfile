@@ -183,15 +183,22 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-
-
 schemes:
   # Colors (Nord)
   nord: &nord
     # Default colors
     primary:
-      background: '#2E3440'
-      foreground: '#D8DEE9'
+      foreground: &g_foreground '#D8DEE9'
+      background: &g_background '#2E3440'
+      bar_fg: &g_bar_fg '#A3BE8C'
+      bar_bg: &g_bar_bg '#2E3440'
+      line_fg: &g_line_fg '#DDA0DD'
+      line_bg: &g_line_bg '#2E3440'
+      matches_fg: &g_matches_fg '#000000'
+      matches_bg: &g_matches_bg '#81A1C1'
+      focused_match_fg: &g_focused_match_fg '#000000'
+      focused_match_bg: &g_focused_match_bg '#FFA500'
+
     # Normal colors
     normal:
       black:   '#3B4252'
@@ -213,158 +220,25 @@ schemes:
       cyan:    '#8FBCBB'
       white:   '#ECEFF4'
     cursor:
-      #text:   CellBackground
+      text:   CellBackground
       cursor: '#EBCB8B'
     vi_mode_cursor:
       text:   CellBackground
-      #cursor: '#EBCB8B'
+      cursor: '#EBCB8B'
+    search:
+      matches:
+        foreground: *g_matches_fg
+        background: *g_matches_bg
+      focused_match:
+        foreground: *g_focused_match_fg
+        background: *g_focused_match_bg
+      bar:
+        foreground: *g_bar_fg
+        background: *g_bar_bg
+    line_indicator:
+      foreground: *g_line_fg
+      background: *g_line_bg
 
-  tokyo-night: &tokyo-night
-    # Default colors
-    primary:
-      background: '0x1a1b26'
-      foreground: '0xa9b1d6'
-
-    # Normal colors
-    normal:
-      black:   '0x32344a'
-      red:     '0xf7768e'
-      green:   '0x9ece6a'
-      yellow:  '0xe0af68'
-      blue:    '0x7aa2f7'
-      magenta: '0xad8ee6'
-      cyan:    '0x449dab'
-      white:   '0x787c99'
-
-    # Bright colors
-    bright:
-      black:   '0x444b6a'
-      red:     '0xff7a93'
-      green:   '0xb9f27c'
-      yellow:  '0xff9e64'
-      blue:    '0x7da6ff'
-      magenta: '0xbb9af7'
-      cyan:    '0x0db9d7'
-      white:   '0xacb0d0'
-
-  tokyo-night-storm: &tokyo-night-storm
-    # Default colors
-    primary:
-      background: '0x24283b'
-      foreground: '0xa9b1d6'
-
-    # Normal colors
-    normal:
-      black:   '0x32344a'
-      red:     '0xf7768e'
-      green:   '0x9ece6a'
-      yellow:  '0xe0af68'
-      blue:    '0x7aa2f7'
-      magenta: '0xad8ee6'
-      cyan:    '0x449dab'
-      white:   '0x9699a8'
-
-    # Bright colors
-    bright:
-      black:   '0x444b6a'
-      red:     '0xff7a93'
-      green:   '0xb9f27c'
-      yellow:  '0xff9e64'
-      blue:    '0x7da6ff'
-      magenta: '0xbb9af7'
-      cyan:    '0x0db9d7'
-      white:   '0xacb0d0'
-
-  # Colors (Gruvbox light)
-  gruvbox-light: &gruvbox-light
-    # Default colors
-    primary:
-      # hard contrast: background = '#f9f5d7'
-      background: '#fbf1c7'
-      # soft contrast: background = '#f2e5bc'
-      foreground: '#3c3836'
-    # Normal colors
-    normal:
-      black:   '#fbf1c7'
-      red:     '#cc241d'
-      green:   '#98971a'
-      yellow:  '#d79921'
-      blue:    '#458588'
-      magenta: '#b16286'
-      cyan:    '#689d6a'
-      white:   '#7c6f64'
-    # Bright colors
-    bright:
-      black:   '#928374'
-      red:     '#9d0006'
-      green:   '#79740e'
-      yellow:  '#b57614'
-      blue:    '#076678'
-      magenta: '#8f3f71'
-      cyan:    '#427b58'
-      white:   '#3c3836'
-
-  # Colors (Gruvbox dark)
-  gruvbox-dark: &gruvbox-dark
-    primary:
-      # hard contrast background - '#1d2021'
-      background:        &gruvbox_dark_bg '#282828'
-      # soft contrast background - '#32302f'
-      foreground:        '#ebdbb2'
-      bright_foreground: '#fbf1c7'
-      dim_foreground:    '#a89984'
-    cursor:
-      text:   CellBackground
-      cursor: CellForeground
-    vi_mode_cursor:
-      text:   CellBackground
-      cursor: CellForeground
-    # search:
-    #   matches:
-    #     foreground: '#000000'
-    #     background: '#ffffff'
-    #   focused_match:
-    #    foreground: CellBackground
-    #    background: CellForeground
-    #   bar:
-    #     background: ''
-    #     foreground: ''
-    # line_indicator:
-    #   foreground: None
-    #   background: None
-    selection:
-      text:       CellBackground
-      background: CellForeground
-    bright:
-      black:   '#928374'
-      red:     '#fb4934'
-      green:   '#b8bb26'
-      yellow:  '#fabd2f'
-      blue:    '#83a598'
-      magenta: '#d3869b'
-      cyan:    '#8ec07c'
-      white:   '#ebdbb2'
-    normal:
-      black:   *gruvbox_dark_bg
-      red:     '#cc241d'
-      green:   '#98971a'
-      yellow:  '#d79921'
-      blue:    '#458588'
-      magenta: '#b16286'
-      cyan:    '#689d6a'
-      white:   '#a89984'
-    dim:
-      black:   '#32302f'
-      red:     '#9d0006'
-      green:   '#79740e'
-      yellow:  '#b57614'
-      blue:    '#076678'
-      magenta: '#8f3f71'
-      cyan:    '#427b58'
-      white:   '#928374'
-    # indexed_colors: []
-
-#colors: *tokyo-night-storm
 colors: *nord
 
 # Colors (Tomorrow Night)
@@ -586,10 +460,12 @@ cursor:
   # the style of the active value of the normal cursor.
   #
   # See `cursor.style` for available options.
-  #vi_mode_style: None
+  vi_mode_style:
+    shape: Block
+    blinking: Never
 
   # Cursor blinking interval in milliseconds.
-  #blink_interval: 750
+  blink_interval: 750
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
@@ -621,7 +497,7 @@ live_config_reload: true
 #
 # Directory the shell is started in. If this is unset, or `None`, the working
 # directory of the parent process will be used.
-#working_directory: None
+working_directory: None
 
 # Send ESC (\x1b) before characters when alt is pressed.
 #alt_send_esc: true
@@ -629,14 +505,14 @@ live_config_reload: true
 # Offer IPC using `alacritty msg` (unix only)
 #ipc_socket: true
 
-#mouse:
+mouse:
   # Click settings
   #
   # The `double_click` and `triple_click` settings control the time
   # alacritty should wait for accepting multiple clicks as one double
   # or triple click.
-  #double_click: { threshold: 300 }
-  #triple_click: { threshold: 300 }
+  double_click: { threshold: 300 }
+  triple_click: { threshold: 300 }
 
   # If this is `true`, the cursor is temporarily hidden when typing.
   #hide_when_typing: false
@@ -1075,7 +951,7 @@ key_bindings:
  - { key: D        ,   mods: Control,       mode: Vi|~Search, action: ScrollHalfPageDown      }
 
  # vi mode
- - { key: E        ,   mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
+ - { key: I        ,   mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
  - { key: I        ,   mode: Vi|~Search,                      action: ToggleViMode            }
 
  - { key: K        ,   mode: Vi|~Search,                      action: Up                      }
