@@ -1,195 +1,161 @@
 local global = require('core.global')
 
-local function bind_option(options)
-    for k, v in pairs(options) do
-        if v == true or v == false then
-            vim.cmd('set ' .. k)
-        else
-            vim.cmd('set ' .. k .. '=' .. v)
-        end
-    end
+vim.opt.termguicolors  = true;
+vim.opt.syntax         = "enable";
+vim.opt.mouse          = "nv";
+vim.opt.errorbells     = true;
+vim.opt.visualbell     = true;
+vim.opt.hidden         = true;
+vim.opt.fileformat     = "unix";
+vim.opt.fileformats    = "unix,mac,dos";
+-- 内部使用的编码方式
+vim.opt.encoding       = "utf-8";
+-- 自动识别的字符编码
+vim.opt.fileencodings  = "utf-8,gb2312,ucs-bom,gb18030,gbk,cp936";
+-- 在保存文件时，指定编码
+vim.opt.fileencoding   = "utf-8";
+vim.opt.magic          = true;
+-- block, insert, all, onemore
+vim.opt.virtualedit    = "block";
+vim.opt.viewoptions    = "folds,cursor,curdir,slash,unix";
+--[[
+blank 恢复编辑无名缓冲区的窗口
+buffers 恢复所有缓冲区（包括隐藏和未载入的缓冲区)
+curdir 恢复当前目录
+folds 恢复折叠
+globals 恢复以大写字母开始并至少包含一个小写字母的全局变量
+help 恢复帮助窗口
+localoptions 恢复（限定于缓冲区内）本地选项
+options 恢复全局映射和选项
+resize 恢复以行列指定的窗口大小
+sesdir 设置当前目录为会话文件所在的位置
+salsh 在文件名中使用salsh（/），来代替backslah（\）
+tabpages 恢复所有标签页
+terminal 恢复终端窗口
+unix 使用Unix模式的行尾标志（<NL>）
+winpos 恢复 GUI Vim 的窗口位置
+winsize 恢复窗口尺寸（相对于屏幕大小
+--]]
+vim.opt.sessionoptions = "curdir,help,tabpages,winsize";
+vim.opt.clipboard      = "unnamedplus";
+vim.opt.wildignorecase = true;
+vim.opt.wildignore     = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**";
+vim.opt.backup         = false;
+vim.opt.writebackup    = false;
+vim.opt.swapfile       = false;
+vim.opt.directory      = global.cache_path .. "swap/";
+vim.opt.undodir        = global.cache_path .. "undo/";
+vim.opt.backupdir      = global.cache_path .. "backup/";
+vim.opt.viewdir        = global.cache_path .. "view/";
+vim.opt.spellfile      = global.cache_path .. "spell/en.uft-8.add";
+vim.opt.history        = 2000;
+vim.opt.shada          = "!,'300,<50,@100,s10,h";
+vim.opt.backupskip     = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim";
+vim.opt.smarttab       = true;
+vim.opt.shiftround     = true;
+vim.opt.timeout        = true;
+vim.opt.ttimeout       = true;
+vim.opt.timeoutlen     = 500;
+vim.opt.ttimeoutlen    = 10;
+vim.opt.updatetime     = 100;
+vim.opt.redrawtime     = 1500;
+vim.opt.ignorecase     = true;
+vim.opt.smartcase      = true;
+-- 自动补全自动调整大小写
+vim.opt.infercase      = true;
+vim.opt.incsearch      = true;
+vim.opt.wrapscan       = true;
+-- 当前行高亮
+vim.opt.cursorline     = true;
+-- 当前列高亮
+vim.opt.cursorcolumn   = false;
+-- 字符宽度
+vim.opt.ambiwidth      = "single";
+-- 自动匹配括号
+vim.opt.showmatch      = true;
+-- 文件有vim之外发生改变会重读文件
+vim.opt.autoread       = true;
+vim.opt.complete       = ".,w,b,k";
+vim.opt.completeopt    = "menu,menuone,noselect";
+vim.opt.inccommand     = "nosplit";
+-- 命令补全
+vim.opt.wildmenu       = true;
+vim.opt.wildmode       = "longest:list,full";
+vim.opt.grepformat     = "%f:%l:%c:%m";
+vim.opt.grepprg        = 'rg --hidden --vimgrep --smart-case --';
+-- 可以断行的字符
+vim.opt.breakat        = [[\ \	;:,!?]];
+vim.opt.startofline    = false;
+vim.opt.whichwrap      = "h,l,<,>,[,],~";
+vim.opt.splitbelow     = true;
+vim.opt.splitright     = true;
+vim.opt.switchbuf      = "useopen";
+vim.opt.backspace      = "indent,eol,start";
+vim.opt.diffopt        = "filler,iwhite,internal,algorithm:patience";
+vim.opt.jumpoptions    = "stack";
+vim.opt.hlsearch       = true;
+vim.opt.showmode       = false;
+vim.opt.shortmess      = "aoOTIcF";
+vim.opt.scrolloff      = 2;
+vim.opt.sidescrolloff  = 5;
+vim.opt.foldlevelstart = 99;
+vim.opt.ruler          = false;
+vim.opt.list           = true;
+vim.opt.showtabline    = 4;
+vim.opt.winwidth       = 30;
+vim.opt.winminwidth    = 10;
+vim.opt.pumheight      = 15;
+vim.opt.helpheight     = 12;
+vim.opt.previewheight  = 12;
+vim.opt.showcmd        = false;
+-- just for nightly
+--vim.opt.cmdheight      = 0;
+vim.opt.cmdwinheight   = 5;
+vim.opt.equalalways    = false;
+vim.opt.laststatus     = 2;
+vim.opt.display        = "lastline";
+vim.opt.showbreak      = "↳  ";
+vim.opt.listchars      = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←";
+vim.opt.pumblend       = 10;
+vim.opt.winblend       = 10;
+vim.opt.undofile       = true;
+vim.opt.synmaxcol      = 2500;
+vim.opt.formatoptions  = "1jcroql";
+vim.opt.textwidth      = 80;
+vim.opt.expandtab      = true;
+vim.opt.autoindent     = true;
+vim.opt.tabstop        = 4;
+vim.opt.shiftwidth     = 4;
+vim.opt.softtabstop    = -1;
+vim.opt.breakindentopt = "shift:2,min:20";
+vim.opt.wrap           = false;
+vim.opt.linebreak      = true;
+vim.opt.number         = true;
+vim.opt.colorcolumn    = "80";
+vim.opt.foldenable     = true;
+vim.opt.signcolumn     = "yes";
+vim.opt.conceallevel   = 2;
+vim.opt.concealcursor  = "niv";
+
+if vim.loop.os_uname().sysname == 'Darwin' then
+  vim.g.clipboard = {
+    name = "macOS-clipboard",
+    copy = {
+      ["+"] = "pbcopy",
+      ["*"] = "pbcopy",
+    },
+    paste = {
+      ["+"] = "pbpaste",
+      ["*"] = "pbpaste",
+    },
+    cache_enabled = 0
+  }
+  vim.g.python_host_prog = '/usr/bin/python'
+  vim.g.python3_host_prog = '/usr/local/bin/python3'
 end
 
-local function load_options()
-    local global_local = {
-        termguicolors  = true;
-        syntax = "enable";
-        --[[
-            设置鼠标可用
-            a所有模式可用
-            n普通模式
-            v可视模式
-            i插入模式
-            c 命令行模式
-        --]]
-        --mouse          = "i";
-        errorbells     = true;
-        visualbell     = true;
-        -- 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
-        hidden         = true;
-        fileformat     = "unix";
-        fileformats    = "unix,mac,dos";
-        -- 内部使用的编码方式
-        encoding       = "utf-8";
-        -- 自动识别的字符编码
-        fileencodings  = "utf-8,gb2312,ucs-bom,gb18030,gbk,cp936";
-        -- 在保存文件时，指定编码
-        fileencoding   = "utf-8";
-        magic          = true;
-        virtualedit    = "block";
-        viewoptions    = "folds,cursor,curdir,slash,unix";
-        sessionoptions = "curdir,help,tabpages,winsize";
-        clipboard      = "unnamedplus";
-        wildignorecase = false;
-        wildignore     = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**";
-        backup         = false;
-        writebackup    = false;
-        swapfile       = false;
-        undofile       = true;
-        directory      = global.cache_path .. "swap/";
-        undodir        = global.cache_path .. "undo/";
-        backupdir      = global.cache_path .. "backup/";
-        viewdir        = global.cache_path .. "view/";
-        spellfile      = global.cache_path .. "spell/en.uft-8.add";
-        history        = 2000;
-        shada          = "!,'300,<50,@100,s10,h";
-        backupskip     = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim";
-        smarttab       = true;
-        shiftround     = true;
-        timeout        = true;
-        ttimeout       = true;
-        timeoutlen     = 500;
-        ttimeoutlen    = 10;
-        updatetime     = 100;
-        redrawtime     = 1500;
-        ignorecase     = true;
-        smartcase      = true;
-        infercase      = true;
-        incsearch      = true;
-        -- 搜索到文件两端不再搜索
-        wrapscan       = false;
-        -- 当前行高亮
-        cursorline     = true;
-        -- 当前列高亮
-        cursorcolumn   = false;
-        -- 窗口分隔符
-        --fillchars      = "vert:\|";
-        -- 状态栏填充 stlnc是别的窗口，stl是本窗口，不会同时生效
-        --fillchars      = "stlnc:\ ";
-        -- 字符宽度
-        ambiwidth      = "single";
-        -- 超过屏幕宽度折行
-        wrap           = true;
-        --t_Co           = "256";
-        -- 自动匹配括号
-        showmatch      = true;
-        -- 文件发生改变会有提示
-        autoread       = true;
-        -- 命令补全
-        wildmenu       = true;
-        wildmode       = "longest:list,full";
-        complete       = ".,w,b,k";
-        inccommand     = "nosplit";
-        grepformat     = "%f:%l:%c:%m";
-        grepprg        = 'rg --hidden --vimgrep --smart-case --';
-        breakat        = [[\ \	;:,!?]];
-        startofline    = false;
-        whichwrap      = "h,l,<,>,[,],~";
-        splitbelow     = true;
-        splitright     = true;
-        switchbuf      = "useopen";
-        backspace      = "indent,eol,start";
-        diffopt        = "filler,iwhite,internal,algorithm:patience";
-        completeopt    = "menuone,noselect";
-        jumpoptions    = "stack";
-        hlsearch       = true;
-        showmode       = false;
-        shortmess      = "aoOTIcF";
-        scrolloff      = 2;
-        sidescrolloff  = 5;
-        foldenable     = true;
-        foldmethod     = "indent";
-        foldlevelstart = 99;
-        ruler          = false;
-        showtabline    = 4;
-        winwidth       = 30;
-        winminwidth    = 10;
-        pumheight      = 15;
-        helpheight     = 12;
-        previewheight  = 12;
-        showcmd        = false;
-        cmdheight      = 2;
-        cmdwinheight   = 5;
-        equalalways    = false;
-        laststatus     = 2;
-        display        = "lastline";
-        showbreak      = "↳  ";
-        list           = true;
-        -- eol:↴
-        listchars      = "tab:»·,nbsp:+,space:·,trail:·,extends:→,precedes:←";
-        pumblend       = 10;
-        winblend       = 10;
-        autoindent     = true;
-        filetype       = "plugin";
-        tabstop        = 4;
-        shiftwidth     = 4;
-        softtabstop    = -1;
-        synmaxcol      = 2500;
-        formatoptions  = "1jcroql";
-        textwidth      = 100;
-        expandtab      = true;
-        breakindentopt = "shift:2,min:20";
-        linebreak      = true;
-        number         = true;
-        --colorcolumn    = "100";
-        signcolumn     = "yes";
-        conceallevel   = 2;
-        concealcursor  = "niv";
-    }
 
-    local bw_local  = {
-        --undofile       = true;
-        --synmaxcol      = 2500;
-        --formatoptions  = "1jcroql";
-        --textwidth      = 100;
-        --expandtab      = true;
-        --tabstop        = 4;
-        --shiftwidth     = 4;
-        --softtabstop    = -1;
-        --breakindentopt = "shift:2,min:20";
-        --wrap           = false;
-        --linebreak      = true;
-        --number         = true;
 
-        --colorcolumn    = "100";
 
-        --signcolumn     = "yes";
-        --conceallevel   = 2;
-        --concealcursor  = "niv";
-    }
 
-    if global.is_mac then
-        vim.g.clipboard = {
-            name = "macOS-clipboard",
-            copy = {
-                ["+"] = "pbcopy",
-                ["*"] = "pbcopy",
-            },
-            paste = {
-                ["+"] = "pbpaste",
-                ["*"] = "pbpaste",
-            },
-            cache_enabled = 0
-        }
-        vim.g.python_host_prog = '/usr/bin/python'
-        vim.g.python3_host_prog = '/usr/local/bin/python3'
-    end
 
-    for name, value in pairs(global_local) do
-        vim.o[name] = value
-    end
-
-    --bind_option(bw_local)
-end
-
-load_options()
