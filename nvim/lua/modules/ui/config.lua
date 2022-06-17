@@ -235,6 +235,7 @@ function config.nvim_bufferline()
 end
 
 function config.indent_blakline()
+    -- vim.opt.listchars:append("space:·")
     require("indent_blankline").setup(
         {
             -- 显示当前所在区域
@@ -246,7 +247,7 @@ function config.indent_blakline()
         }
     )
     vim.g.indent_blankline_char = "│"
-    vim.g.indent_blankline_show_first_indent_level = false
+    vim.g.indent_blankline_show_first_indent_level = true
     vim.g.indent_blankline_filetype_exclude = {
         "startify",
         "dashboard",
@@ -271,7 +272,7 @@ function config.indent_blakline()
         "" -- for all buffers without a file type
     }
     vim.g.indent_blankline_buftype_exclude = {"terminal", "nofile"}
-    vim.g.indent_blankline_show_trailing_blankline_indent = true
+    vim.g.indent_blankline_show_trailing_blankline_indent = false
     vim.g.indent_blankline_show_current_context = true
     vim.g.indent_blankline_context_patterns = {
         "class",
