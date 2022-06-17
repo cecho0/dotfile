@@ -242,11 +242,11 @@ function config.indent_blakline()
             -- 显示当前所在区域的开始位置
             show_current_context_start = true,
             -- 显示行尾符
-            show_end_of_line = true
+            show_end_of_line = true,
         }
     )
     vim.g.indent_blankline_char = "│"
-    vim.g.indent_blankline_show_first_indent_level = true
+    vim.g.indent_blankline_show_first_indent_level = false
     vim.g.indent_blankline_filetype_exclude = {
         "startify",
         "dashboard",
@@ -271,7 +271,7 @@ function config.indent_blakline()
         "" -- for all buffers without a file type
     }
     vim.g.indent_blankline_buftype_exclude = {"terminal", "nofile"}
-    vim.g.indent_blankline_show_trailing_blankline_indent = false
+    vim.g.indent_blankline_show_trailing_blankline_indent = true
     vim.g.indent_blankline_show_current_context = true
     vim.g.indent_blankline_context_patterns = {
         "class",
