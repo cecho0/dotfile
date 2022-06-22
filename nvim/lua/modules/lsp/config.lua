@@ -34,7 +34,7 @@ function config.rust_tools()
                 typeHints = true,
             },
         },
-    
+
         -- all the opts to send to nvim-lspconfig
         -- these override the defaults set by rust-tools.nvim
         -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
@@ -53,8 +53,9 @@ function config.rust_tools()
             }
         },
     }
-    
-    require('rust-tools').setup(opts)
+
+    --require('rust-tools').setup(opts)
+    require('rust-tools').setup({})
 end
 
 function config.nvim_lsp_installer()
@@ -76,7 +77,7 @@ function config.nvim_lsp_installer()
         --sqls = require("lsp.sqls"),
         -- vuels = require("lsp.vuels")
         clangd = require("lsp.clangd"),
-        rust_analyzer = require("lsp.rust_analyzer"),
+        -- rust_analyzer = require("lsp.rust_analyzer"),
     }
 
     --这里是 LSP 服务启动后的按键加载
@@ -91,7 +92,6 @@ function config.nvim_lsp_installer()
 
         --跳转到定义（代替内置 LSP 的窗口, telescope 插件让跳转定义更方便）
         vim.keybinds.bmap(bufnr, "n", "gd", "<cmd>Telescope lsp_definitions theme=dropdown<CR>", vim.keybinds.opts)
-        
         -- 列出光标下所有引用（代替内置 LSP 的窗口，telescope 插件让查看引用更方便）
         vim.keybinds.bmap(bufnr, "n", "gr", "<cmd>Telescope lsp_references theme=dropdown<CR>", vim.keybinds.opts)
         -- 工作区诊断（代替内置 LSP 的窗口，telescope 插件让工作区诊断更方便）
@@ -451,103 +451,8 @@ function config.nvim_lint()
     ]])
 end
 
-function config.nvim_dap()
-    -- https://github.com/mfussenegger/nvim-dap
-    -- WARN: dap 手动下载调试器
-    -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
-
-    local dap = require("dap")
-
-    -- 设置断点样式
-    vim.fn.sign_define("DapBreakpoint", {text = "⊚", texthl = "TodoFgFIX", linehl = "", numhl = ""})
-
-    -- 加载调试器配置
-    local dap_config = {
-        python = require("dap.python"),
-        --go = require("dap.go"),
-        --c = require("dap.cpp")
-    }
-
-    -- 设置调试器
-    for _, dap_options in pairs(dap_config) do
-        dap.adapters[dap_options.name.adapters_name] = dap_options.adapters
-        dap.configurations[dap_options.name.configurations_name] = dap_options.configurations
-    end
-
-    vim.keybinds = {
-        gmap = vim.api.nvim_set_keymap,
-        bmap = vim.api.nvim_buf_set_keymap,
-        dgmap = vim.api.nvim_del_keymap,
-        dbmap = vim.api.nvim_buf_del_keymap,
-        opts = {noremap = true, silent = true}
-    }
-    -- 打断点
-    vim.keybinds.gmap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", vim.keybinds.opts)
-    -- 开启调试或到下一个断点处
-    vim.keybinds.gmap("n", "<F5>", "<cmd>lua require'dap'.continue()<CR>", vim.keybinds.opts)
-    -- 单步进入执行（会进入函数内部，有回溯阶段）
-    vim.keybinds.gmap("n", "<F6>", "<cmd>lua require'dap'.step_into()<CR>", vim.keybinds.opts)
-    -- 单步跳过执行（不进入函数内部，无回溯阶段）
-    vim.keybinds.gmap("n", "<F7>", "<cmd>lua require'dap'.step_over()<CR>", vim.keybinds.opts)
-    -- 步出当前函数
-    vim.keybinds.gmap("n", "<F8>", "<cmd>lua require'dap'.step_out()<CR>", vim.keybinds.opts)
-    -- 重启调试
-    vim.keybinds.gmap("n", "<F9>", "<cmd>lua require'dap'.run_last()<CR>", vim.keybinds.opts)
-    -- 退出调试（关闭调试，关闭 repl，关闭 ui，清除内联文本）
-    vim.keybinds.gmap(
-        "n",
-        "<F10>",
-        "<cmd>lua require'dap'.close()<CR><cmd>lua require'dap.repl'.close()<CR><cmd>lua require'dapui'.close()<CR><cmd>DapVirtualTextForceRefresh<CR>",
-        vim.keybinds.opts
-    )
-end
-
-function config.nvim_dap_virtual_text()
-    require("nvim-dap-virtual-text").setup()
-end
-
-function config.nvim_dap_ui()
-    local dap = require("dap")
-    local dapui = require("dapui")
-
-    -- 初始化调试界面
-    dapui.setup(
-        {
-            sidebar = {
-                -- dapui 的窗口设置在右边
-                position = "right"
-            }
-        }
-    )
-
-    -- 如果开启或关闭调试，则自动打开或关闭调试界面
-    dap.listeners.after.event_initialized["dapui_config"] = function()
-        dapui.open()
-    end
-
-    dap.listeners.before.event_terminated["dapui_config"] = function()
-        dapui.close()
-        dap.repl.close()
-    end
-
-    dap.listeners.before.event_exited["dapui_config"] = function()
-        dapui.close()
-        dap.repl.close()
-    end
-
-    vim.keybinds = {
-        gmap = vim.api.nvim_set_keymap,
-        bmap = vim.api.nvim_buf_set_keymap,
-        dgmap = vim.api.nvim_del_keymap,
-        dbmap = vim.api.nvim_buf_del_keymap,
-        opts = {noremap = true, silent = true}
-    }
-    -- 显示或隐藏调试界面
-    vim.keybinds.gmap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<CR>", vim.keybinds.opts)
-end
-
 function config.symbols_outline()
-    
+
 end
 
 return config

@@ -8,16 +8,17 @@ template:
         Fixed: 1
       run:
         plugin:
-          location: "zellij:tab-bar"
+          #location: "zellij:tab-bar"
+          location: "zellij:compact-bar"
     - direction: Vertical # part 2
       body: true
-    - direction: Vertical # part 3
-      borderless: true
-      split_size:
-        Fixed: 2
-      run:
-        plugin:
-          location: "zellij:status-bar"
+    #- direction: Vertical # part 3
+    #  borderless: true
+    #  split_size:
+    #    Fixed: 2
+    #  run:
+    #    plugin:
+    #      location: "zellij:status-bar"
 
 tabs:
   - name: "code"

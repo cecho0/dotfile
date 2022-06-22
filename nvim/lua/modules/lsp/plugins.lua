@@ -57,27 +57,6 @@ lsp["mfussenegger/nvim-lint"] = {
     config = conf.nvim_lint,
 }
 
--- 代码调试基础插件
-lsp["mfussenegger/nvim-dap"] = {
-    config = conf.nvim_dap,
-}
-
--- 为代码调试提供内联文本
-lsp["theHamsta/nvim-dap-virtual-text"] = {
-    config = conf.nvim_dap_virtual_text,
-    require = {
-        "mfussenegger/nvim-dap",
-    }
-}
-
--- 为代码调试提供 UI 界面
-lsp["rcarriga/nvim-dap-ui"] = {
-    config = conf.nvim_dap_ui,
-    requires = {
-        "mfussenegger/nvim-dap",
-    }
-}
-
 lsp["simrat39/symbols-outline.nvim"] = {
     config = conf.symbols_outline,
 }
