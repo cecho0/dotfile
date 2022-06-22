@@ -69,7 +69,8 @@ fi
 # bat -- A cat clone with syntax highlighting and Git integration.
 if [ "$(command -v bat)" ]; then
     unalias -m 'cat'
-    alias cat='bat -pp --theme="Nord"'
+    # alias cat='bat -pp --theme="Nord"'
+    alias cat='bat --theme="Nord"'
 fi
 
 
