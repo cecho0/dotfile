@@ -1,7 +1,7 @@
 config = {}
 
 function config.tokyonight()
-    -- stome, night, day
+  -- stome, night, day
 end
 
 function config.one_nvim()
