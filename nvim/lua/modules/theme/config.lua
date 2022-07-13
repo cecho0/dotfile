@@ -1,4 +1,4 @@
-config = {}
+local config = {}
 
 function config.tokyonight()
   -- stome, night, day
@@ -15,5 +15,10 @@ end
 function config.nightfox()
 
 end
+
+function config.zephyr()
+
+end
+
 
 return config

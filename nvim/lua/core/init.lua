@@ -18,7 +18,8 @@ local load_colorscheme = function()
   --vim.cmd("colorscheme nord")
   --vim.cmd("colorscheme moonlight")
   --vim.cmd("colorscheme gloombuddy")
-  vim.cmd("colorscheme duskfox")
+  --vim.cmd("colorscheme duskfox")
+  vim.cmd("colorscheme zephyr")
 end
 
 local load_client_cfg = function ()
@@ -44,7 +45,10 @@ local load_core = function()
 
   require("core.basic")
   require("keymap")
-  require("core.plug")
+
+  if global.need_load_plugins then
+    require("core.plug")
+  end
 
   load_colorscheme()
   load_client_cfg()

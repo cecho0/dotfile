@@ -1,6 +1,7 @@
 local global = {}
 local home = os.getenv("HOME")
 local os_name = vim.loop.os_uname().sysname
+local load_plugins = true
 
 function global:load_variables()
   self.is_mac   = os_name == 'Darwin'
@@ -17,6 +18,7 @@ function global:load_variables()
   -- user home path
   self.home_path = home
 
+  self.need_load_plugins = load_plugins
   -- plugins path
   self.modules_path = self.config_path .. self.path_sep .. 'modules'
 end

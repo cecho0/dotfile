@@ -18,4 +18,11 @@ theme["EdenEast/nightfox.nvim"] = {
   config = conf.nightfox
 }
 
+theme["glepnir/zephyr-nvim"] = {
+  config = conf.zephyr,
+  requires = {
+    "nvim-treesitter/nvim-treesitter"
+  },
+}
+
 return theme
